@@ -35,7 +35,7 @@ export function ExecutiveConnect() {
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold text-white mb-2">Get in Touch</h2>
           <p className="text-zinc-400">
-            Let's discuss data science, logistics optimization, or collaboration opportunities
+            Let&apos;s discuss data science, logistics optimization, or collaboration opportunities
           </p>
         </div>
 

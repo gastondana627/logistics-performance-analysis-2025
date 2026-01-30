@@ -1,7 +1,7 @@
 "use client";
 
 import { GlassCard } from "./GlassCard";
-import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart } from "recharts";
+import { Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart } from "recharts";
 
 interface ChartData {
   date: string;
@@ -70,7 +70,7 @@ export function StrainChart({ data }: { data: ChartData[] }) {
       </ResponsiveContainer>
 
       <div className="mt-4 text-xs text-zinc-500 font-mono">
-        Data Source: mock_data.json | Visualization: Recharts | R² = 0.87
+        Data Source: ups_health_clean.json | Visualization: Recharts | R² = 0.87
       </div>
     </GlassCard>
   );

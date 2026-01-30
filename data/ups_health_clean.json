@@ -1,0 +1,65 @@
+[
+  {
+    "id": "shift_001",
+    "date": "2025-12-04",
+    "day_type": "Peak - High Intensity",
+    "metrics": {
+      "steps": 7223,
+      "calories": 1628,
+      "active_mins": 193,
+      "intensity_density": 8.44,
+      "strain_index": 11.72
+    },
+    "context": {
+      "event": "Volume Inbound Sort",
+      "note": "Maximum caloric burn recorded per active minute. Compressed operational window required high-velocity sorting to manage inbound overflow."
+    },
+    "metadata": {
+      "is_estimated": false,
+      "sensor_quality": "High",
+      "img_url": "/shifts/day1.jpg"
+    }
+  },
+  {
+    "id": "shift_002",
+    "date": "2025-12-02",
+    "day_type": "Peak - Tuesday Setup",
+    "metrics": {
+      "steps": 7624,
+      "calories": 1534,
+      "active_mins": 155,
+      "intensity_density": 9.90,
+      "strain_index": 7.55
+    },
+    "context": {
+      "event": "Early Peak Integration",
+      "note": "High physical load during initial facility setup. Significant manual lifting and positioning of irregular-sized packages."
+    },
+    "metadata": {
+      "is_estimated": false,
+      "sensor_quality": "High",
+      "img_url": "/shifts/day2.jpg"
+    }
+  },
+  {
+    "id": "shift_003",
+    "date": "2025-12-10",
+    "day_type": "Mid-Peak Support",
+    "metrics": {
+      "steps": 8103,
+      "calories": 1049,
+      "active_mins": 133,
+      "intensity_density": 7.89,
+      "strain_index": 6.39
+    },
+    "context": {
+      "event": "Sortation Support",
+      "note": "Highest step count within a 2-hour window. Fast-paced movement across multiple belts to maintain sort flow during a primary belt jam."
+    },
+    "metadata": {
+      "is_estimated": false,
+      "sensor_quality": "High",
+      "img_url": "/shifts/day3.jpg"
+    }
+  }
+]

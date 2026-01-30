@@ -1,36 +1,195 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project: Human Logistics Audit
 
-## Getting Started
+A sophisticated, production-ready data science portfolio site showcasing biometric analysis of UPS Peak Season operations. Built with Next.js 14, TypeScript, Tailwind CSS, and Recharts.
 
-First, run the development server:
+## 🎨 Design Philosophy
+
+**Sophisticated Industrial Aesthetic**
+- Dark mode foundation (`bg-zinc-950`)
+- Glassmorphism panels with `backdrop-blur-xl` and `border-white/10`
+- UPS Gold (`#ffb500`) and Deep Brown (`#351c15`) accent colors
+- Progressive disclosure UI pattern for technical insights
+
+## 🚀 Features
+
+### Hero Header
+Glassmorphism effect with biometric verification badge and category icons (Logistics, Health Analytics, Data Science)
+
+### Strategic Summary
+Two-column narrative section featuring:
+- **The Mission**: High-fidelity analysis of 3 compressed operational windows
+- **The Methodology**: Tech stack tags with hover effects (Next.js 14, Python/Pandas, Samsung Health API, Vercel AI SDK, Kaggle)
+
+### Triple Spotlight: 3 High-Impact Case Studies
+Centered layout featuring the top 3 verified shifts with:
+- Larger card format (25% increase) for visual prominence
+- Shift photo placeholders
+- Primary metrics (Steps & Calories)
+- **Intensity Density** highlight (cal/min) - custom engineered metric
+- Expandable "Developer Insights" with technical metadata
+- Dynamic data mapping from `ups_health_clean.json`
+
+### Interactive Chart
+Recharts-powered correlation analysis showing exercise time vs physical strain with dual-axis visualization, dynamically generated from the top 3 shifts
+
+### Knowledge Bridge Footer
+Professional CTA section with:
+- Kaggle deep dive button (UPS Gold gradient)
+- Vercel deployment status indicator
+- Comprehensive technical disclaimer about data migration
+
+### Executive Connect
+Sleek contact section with premium hover effects:
+- LinkedIn, GitHub, Email buttons (glassmorphism style)
+- "Book a Consultation" primary CTA (UPS Gold gradient)
+- Subtle lift animation on hover (`hover:-translate-y-1`)
+
+## 📦 Tech Stack
+
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Recharts
+- Lucide React Icons
+- Python (Data Pipeline)
+
+## 🔄 Data Pipeline
+
+The project uses a Python-based ETL pipeline to transform raw CSV data into optimized JSON:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Located in parent directory: scripts/csv_to_json.py
+python scripts/csv_to_json.py
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Pipeline Features:**
+- Calculates **Intensity Density** (calories/active_mins) - custom metric
+- Type validation and error handling
+- Outputs to `data/ups_health_clean.json`
+- Frontend dynamically imports from `@/data/ups_health_clean.json`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Data Structure:**
+```json
+{
+  "id": "shift_001",
+  "date": "2025-12-04",
+  "day_type": "Peak - High Intensity",
+  "metrics": {
+    "steps": 7223,
+    "calories": 1628,
+    "active_mins": 193,
+    "intensity_density": 8.44,
+    "strain_index": 11.72
+  },
+  "context": {
+    "event": "Volume Inbound Sort",
+    "note": "Technical context..."
+  },
+  "metadata": {
+    "is_estimated": false,
+    "sensor_quality": "High",
+    "img_url": "/shifts/day1.jpg"
+  }
+}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Installation
 
-## Learn More
+```bash
+# Navigate to project
+cd human-logistics-audit
 
-To learn more about Next.js, take a look at the following resources:
+# Install dependencies
+npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Run development server
+npm run dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Build for production
+npm run build
 
-## Deploy on Vercel
+# Start production server
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 Project Structure
+
+```
+human-logistics-audit/
+├── app/
+│   ├── layout.tsx              # Root layout with metadata
+│   ├── page.tsx                # Main dashboard (imports from @/data/ups_health_clean.json)
+│   └── globals.css             # Global styles
+├── components/
+│   ├── GlassCard.tsx           # Reusable glassmorphism card
+│   ├── StrategicSummary.tsx    # Mission & methodology section
+│   ├── PeakDayCard.tsx         # Shift card with intensity density & expandable insights
+│   ├── StrainChart.tsx         # Recharts correlation visualization
+│   └── ExecutiveConnect.tsx    # Professional contact section
+├── data/
+│   └── ups_health_clean.json   # Source of truth (generated by csv_to_json.py)
+├── lib/
+│   └── utils.ts                # Utility functions (cn helper)
+└── tailwind.config.ts          # Tailwind with UPS color palette
+```
+
+## 🎨 Color Palette
+
+- **Background**: `bg-zinc-950` (#09090b)
+- **UPS Gold**: `#ffb500`
+- **Deep Brown**: `#351c15`
+- **Glass Effect**: `bg-white/5` with `backdrop-blur-xl`
+- **Borders**: `border-white/10`
+
+## 🔧 Customization
+
+### Update Data
+1. Edit your CSV source file
+2. Run `python scripts/csv_to_json.py` to regenerate JSON
+3. The Next.js app automatically uses the top 3 shifts via `data.slice(0, 3)`
+
+### Update Contact Links
+Already configured with:
+- LinkedIn: https://www.linkedin.com/in/gaston-d-859653184/
+- GitHub: https://github.com/gastondana627
+- Email: gastondana627@gmail.com
+
+### Modify Color Scheme
+Update `tailwind.config.ts` to adjust the UPS color palette or add new theme colors.
+
+### Connect Kaggle Notebook
+Update the Kaggle button href in `app/page.tsx` to link to your published notebook.
+
+## 🎯 Key Design Decisions
+
+### Why 3 Case Studies Instead of 7?
+- **Quality over Quantity**: Focus on verified, high-fidelity data
+- **Visual Impact**: Larger cards (25% increase) create stronger visual hierarchy
+- **Narrative Focus**: "Compressed operational windows" tells a more precise story
+- **Engineering Rigor**: Demonstrates data curation and selection methodology
+
+### Intensity Density Metric
+Custom-calculated metric (calories/active_mins) showcases:
+- Data engineering capability
+- Domain-specific insight creation
+- Python-to-frontend pipeline integration
+
+## 🚢 Deployment
+
+Deploy to Vercel with one click:
+
+```bash
+vercel
+```
+
+Or connect your GitHub repository to Vercel for automatic deployments.
+
+## 📝 License
+
+This project is open source and available for portfolio use.
+
+---
+
+Built with ❤️ for data science storytelling

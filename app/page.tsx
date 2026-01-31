@@ -10,7 +10,7 @@ import { Package, Heart, Code, ExternalLink, CheckCircle2 } from "lucide-react";
 import shiftData from "../src/data/ups_health_clean.json";
 
 export default function Home() {
-  // Use shifts in the exact order they appear in JSON (Dec 4, 2, 10)
+  // Use shifts in the exact order they appear in JSON (Dec 2, Dec 4, Dec 10)
   const topShifts = shiftData.slice(0, 3);
 
   // Prepare chart data - Use UTC to ensure dates match the JSON exactly

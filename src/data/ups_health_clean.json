@@ -1,26 +1,5 @@
 [
   {
-    "id": "shift_001",
-    "date": "2025-12-04",
-    "day_type": "Peak - Day 1 Setup",
-    "metrics": {
-      "steps": 7223,
-      "calories": 1628,
-      "active_mins": 193,
-      "intensity_density": 8.44,
-      "strain_index": 11.72
-    },
-    "context": {
-      "event": "Volume Inbound Sort",
-      "note": "Maximum caloric burn recorded per active minute. Compressed operational window required high-velocity sorting to manage inbound overflow."
-    },
-    "metadata": {
-      "is_estimated": false,
-      "sensor_quality": "High",
-      "img_url": "/images/audit/Day_1_Samsung_Health.jpg"
-    }
-  },
-  {
     "id": "shift_002",
     "date": "2025-12-02",
     "day_type": "Peak - Day 2 Max Volumetric",
@@ -39,6 +18,27 @@
       "is_estimated": false,
       "sensor_quality": "High",
       "img_url": "/images/audit/Day_2_Samsung_Health.jpg"
+    }
+  },
+  {
+    "id": "shift_001",
+    "date": "2025-12-04",
+    "day_type": "Peak - Day 1 Setup",
+    "metrics": {
+      "steps": 7223,
+      "calories": 1628,
+      "active_mins": 193,
+      "intensity_density": 8.44,
+      "strain_index": 11.72
+    },
+    "context": {
+      "event": "Volume Inbound Sort",
+      "note": "Maximum caloric burn recorded per active minute. Compressed operational window required high-velocity sorting to manage inbound overflow."
+    },
+    "metadata": {
+      "is_estimated": false,
+      "sensor_quality": "High",
+      "img_url": "/images/audit/Day_1_Samsung_Health.jpg"
     }
   },
   {

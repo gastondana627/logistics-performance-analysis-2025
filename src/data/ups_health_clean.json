@@ -2,12 +2,12 @@
   {
     "id": "shift_002",
     "date": "2025-12-02",
-    "day_type": "Peak - Day 2 Max Volumetric",
+    "day_type": "Peak - Day 1 Setup",
     "metrics": {
       "steps": 7624,
       "calories": 1534,
       "active_mins": 155,
-      "intensity_density": 9.90,
+      "intensity_density": 8.44,
       "strain_index": 7.55
     },
     "context": {
@@ -17,18 +17,18 @@
     "metadata": {
       "is_estimated": false,
       "sensor_quality": "High",
-      "img_url": "/images/audit/Day_2_Samsung_Health.jpg"
+      "img_url": "/images/audit/Day_1_Samsung_Health.jpg"
     }
   },
   {
     "id": "shift_001",
     "date": "2025-12-04",
-    "day_type": "Peak - Day 1 Setup",
+    "day_type": "Peak - Day 2 Max Volumetric",
     "metrics": {
       "steps": 7223,
       "calories": 1628,
       "active_mins": 193,
-      "intensity_density": 8.44,
+      "intensity_density": 9.90,
       "strain_index": 11.72
     },
     "context": {
@@ -38,7 +38,7 @@
     "metadata": {
       "is_estimated": false,
       "sensor_quality": "High",
-      "img_url": "/images/audit/Day_1_Samsung_Health.jpg"
+      "img_url": "/images/audit/Day_2_Samsung_Health.jpg"
     }
   },
   {

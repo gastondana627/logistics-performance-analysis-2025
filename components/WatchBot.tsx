@@ -14,7 +14,7 @@ interface Message {
 const AUDIT_KNOWLEDGE = {
   dec4_intensity: {
     keywords: ['dec 4', 'hardest', 'intensity', 'dec4', 'december 4', 'toughest'],
-    response: "On Dec 4th, we recorded a peak Intensity Density of 8.44 cal/min. Despite not being the longest shift, the volumetric weight made it the most physically taxing window in the audit."
+    response: "On Dec 4th, we recorded a peak Intensity Density of 9.90 cal/min. Despite not being the longest shift, the volumetric weight made it the most physically taxing window in the audit."
   },
   dec10_paradox: {
     keywords: ['dec 10', 'steps', 'paradox', 'dec10', 'december 10', 'movement'],

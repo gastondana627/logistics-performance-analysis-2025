@@ -3,6 +3,7 @@ import { PeakDayCard } from "@/components/PeakDayCard";
 import { StrainChart } from "@/components/StrainChart";
 import { StrategicSummary } from "@/components/StrategicSummary";
 import { ExecutiveConnect } from "@/components/ExecutiveConnect";
+import { ResearchTransparency } from "@/components/ResearchTransparency";
 import { WatchBot } from "@/components/WatchBot";
 import { Package, Heart, Code, ExternalLink, CheckCircle2 } from "lucide-react";
 
@@ -160,7 +161,13 @@ export default function Home() {
         </GlassCard>
       </footer>
 
+      {/* Executive Connect Section */}
       <ExecutiveConnect />
+
+      {/* Research Transparency Footer */}
+      <ResearchTransparency />
+
+      {/* WatchBot - Galaxy Watch 5 Digital Twin */}
       <WatchBot />
     </main>
   );

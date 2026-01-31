@@ -2,7 +2,7 @@
   {
     "id": "shift_001",
     "date": "2025-12-04",
-    "day_type": "Peak - High Intensity",
+    "day_type": "Peak - Day 1 Setup",
     "metrics": {
       "steps": 7223,
       "calories": 1628,
@@ -17,13 +17,13 @@
     "metadata": {
       "is_estimated": false,
       "sensor_quality": "High",
-      "img_url": "/shifts/day1.jpg"
+      "img_url": "/images/audit/Day_1_Samsung_Health.jpg"
     }
   },
   {
     "id": "shift_002",
     "date": "2025-12-02",
-    "day_type": "Peak - Tuesday Setup",
+    "day_type": "Peak - Day 2 Max Volumetric",
     "metrics": {
       "steps": 7624,
       "calories": 1534,
@@ -38,13 +38,13 @@
     "metadata": {
       "is_estimated": false,
       "sensor_quality": "High",
-      "img_url": "/shifts/day2.jpg"
+      "img_url": "/images/audit/Day_2_Samsung_Health.jpg"
     }
   },
   {
     "id": "shift_003",
     "date": "2025-12-10",
-    "day_type": "Mid-Peak Support",
+    "day_type": "Peak - Day 3 Optimization",
     "metrics": {
       "steps": 8103,
       "calories": 1049,
@@ -59,7 +59,7 @@
     "metadata": {
       "is_estimated": false,
       "sensor_quality": "High",
-      "img_url": "/shifts/day3.jpg"
+      "img_url": "/images/audit/Day_3_Samsung_Health.jpg"
     }
   }
 ]

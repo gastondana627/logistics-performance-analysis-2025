@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { GlassCard } from "./GlassCard";
-import { ChevronDown, ChevronUp, Activity, Zap } from "lucide-react";
+import { ChevronDown, ChevronUp, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface ShiftData {
   id: string;
@@ -30,16 +31,29 @@ interface ShiftData {
 export function PeakDayCard({ shift }: { shift: ShiftData }) {
   const [expanded, setExpanded] = useState(false);
 
+  // Format date from YYYY-MM-DD to readable format
+  const formattedDate = new Date(shift.date).toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric' 
+  });
+
   return (
     <GlassCard hover className="p-6 flex flex-col h-full">
-      {/* Shift Photo Placeholder */}
-      <div className="w-full h-48 bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-md mb-4 flex items-center justify-center border border-white/5">
-        <Activity className="w-12 h-12 text-ups-gold/40" />
+      {/* Shift Photo */}
+      <div className="w-full h-48 bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-md mb-4 flex items-center justify-center border border-white/5 overflow-hidden relative">
+        <Image
+          src={shift.metadata.img_url}
+          alt={`${shift.context.event} - ${formattedDate}`}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
       </div>
 
       {/* Date & Day Type */}
       <div className="mb-2">
-        <div className="text-sm text-zinc-400">{new Date(shift.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
+        <div className="text-sm text-zinc-400">{formattedDate}</div>
         <div className="text-xs text-ups-gold font-semibold">{shift.day_type}</div>
       </div>
 
@@ -102,3 +116,4 @@ export function PeakDayCard({ shift }: { shift: ShiftData }) {
     </GlassCard>
   );
 }
+

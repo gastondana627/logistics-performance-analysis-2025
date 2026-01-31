@@ -3,14 +3,15 @@ import { PeakDayCard } from "@/components/PeakDayCard";
 import { StrainChart } from "@/components/StrainChart";
 import { StrategicSummary } from "@/components/StrategicSummary";
 import { ExecutiveConnect } from "@/components/ExecutiveConnect";
+import { WatchBot } from "@/components/WatchBot";
 import { Package, Heart, Code, ExternalLink, CheckCircle2 } from "lucide-react";
 import shiftData from "@/data/ups_health_clean.json";
 
 export default function Home() {
-  // Use only top 3 verified shifts
+  // Use shifts in the exact order they appear in JSON (no sorting)
   const topShifts = shiftData.slice(0, 3);
 
-  // Prepare chart data from the shifts
+  // Prepare chart data from the shifts - use actual dates from JSON
   const chartData = topShifts.map((shift) => ({
     date: new Date(shift.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
     exerciseMinutes: shift.metrics.active_mins,
@@ -119,16 +120,16 @@ export default function Home() {
             <div className="bg-amber-500/5 border border-amber-500/20 rounded-lg p-4">
               <h3 className="text-sm font-bold text-amber-400 mb-2 flex items-center gap-2">
                 <Code className="w-4 h-4" />
-                Technical Disclaimer
+                Technical Audit & Data Fidelity
               </h3>
               <p className="text-xs text-zinc-400 leading-relaxed">
-                This dataset represents a Samsung Health → Apple Health migration completed in December 2024.
-                Step counts were validated against Apple Watch Series 9 baseline measurements with a mean
-                absolute error of ±2.3%. Heart rate data exhibits minor gaps (&lt;1.3% of total observations)
-                due to warehouse metal infrastructure interfering with optical sensors. Missing values were
-                imputed using linear interpolation where gaps were &lt;5 minutes, and excluded from aggregate
-                metrics otherwise. All data cleaning decisions are documented in the Kaggle notebook with
-                full reproducibility via provided Python scripts.
+                This analysis was powered by the{" "}
+                <span className="text-ups-gold font-semibold">Samsung BioActive Sensor</span> suite on the{" "}
+                <span className="text-ups-gold font-semibold">Galaxy Watch 5</span>. Data aggregation and 
+                AI-enhanced sensor fusion were performed via the{" "}
+                <span className="text-ups-gold font-semibold">S22 Ultra</span> hub. This project isolates 
+                Operational Strain by filtering out non-sortation movement to provide an accurate representation 
+                of physical output during the 2025 Peak Season.
               </p>
             </div>
           </div>
@@ -138,11 +139,24 @@ export default function Home() {
             <p>Built with Next.js 14, TypeScript, Tailwind CSS, and Recharts</p>
             <p className="mt-1">© 2024 Human Logistics Audit Project</p>
           </div>
+
+          {/* Legal Disclaimer */}
+          <div className="mt-6 pt-6 border-t border-white/5">
+            <p className="text-[10px] text-zinc-500 leading-relaxed text-center max-w-4xl mx-auto">
+              <span className="font-semibold">Disclaimer:</span> This project is an independent research audit 
+              and is not affiliated with, endorsed by, or sponsored by United Parcel Service of America, Inc. (UPS). 
+              All UPS trademarks and logos are the property of their respective owners. Personal health metrics 
+              are shared for educational purposes; all sensitive PII has been redacted.
+            </p>
+          </div>
         </GlassCard>
       </footer>
 
       {/* Executive Connect Section */}
       <ExecutiveConnect />
+
+      {/* WatchBot - Galaxy Watch 5 Digital Twin */}
+      <WatchBot />
     </main>
   );
 }

@@ -21,9 +21,12 @@ export function StrategicSummary() {
           </div>
           <p className="text-zinc-300 leading-relaxed">
             A high-fidelity analysis of 3 compressed operational windows during the 2025 UPS Peak Season. 
-            Rather than a full-season log, this study focuses on verified, high-intensity shifts that 
-            demonstrate the intersection of industrial logistics and biometric data science through 
-            precision measurement and engineering-grade metrics.
+            Powered by the{" "}
+            <span className="text-ups-gold font-semibold">Samsung BioActive Sensor</span> suite on the{" "}
+            <span className="text-ups-gold font-semibold">Galaxy Watch 5</span>, this study isolates 
+            Operational Strain by filtering out non-sortation movement, demonstrating the intersection 
+            of industrial logistics and biometric data science through precision measurement and 
+            engineering-grade metrics.
           </p>
         </div>
 

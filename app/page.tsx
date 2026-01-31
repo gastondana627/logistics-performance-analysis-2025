@@ -5,19 +5,27 @@ import { StrategicSummary } from "@/components/StrategicSummary";
 import { ExecutiveConnect } from "@/components/ExecutiveConnect";
 import { WatchBot } from "@/components/WatchBot";
 import { Package, Heart, Code, ExternalLink, CheckCircle2 } from "lucide-react";
-import shiftData from "@/data/ups_health_clean.json";
+
+// CORRECTED: Pointing to the actual file location in src/data
+import shiftData from "../src/data/ups_health_clean.json";
 
 export default function Home() {
-  // Use shifts in the exact order they appear in JSON (no sorting)
+  // Use shifts in the exact order they appear in JSON (Dec 4, 2, 10)
   const topShifts = shiftData.slice(0, 3);
 
-  // Prepare chart data from the shifts - use actual dates from JSON
-  const chartData = topShifts.map((shift) => ({
-    date: new Date(shift.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-    exerciseMinutes: shift.metrics.active_mins,
-    strain: shift.metrics.strain_index,
-    steps: shift.metrics.steps,
-  }));
+  // Prepare chart data - Use UTC to ensure dates match the JSON exactly
+  const chartData = topShifts.map((shift) => {
+    const dateObj = new Date(shift.date);
+    return {
+      date: new Date(dateObj.getTime() + dateObj.getTimezoneOffset() * 60000).toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric' 
+      }),
+      exerciseMinutes: shift.metrics.active_mins,
+      strain: shift.metrics.strain_index,
+      steps: shift.metrics.steps,
+    };
+  });
 
   return (
     <main className="min-h-screen bg-zinc-950 text-white">
@@ -152,10 +160,7 @@ export default function Home() {
         </GlassCard>
       </footer>
 
-      {/* Executive Connect Section */}
       <ExecutiveConnect />
-
-      {/* WatchBot - Galaxy Watch 5 Digital Twin */}
       <WatchBot />
     </main>
   );

@@ -48,13 +48,10 @@ export function PeakDayCard({ shift }: { shift: ShiftData }) {
     <GlassCard hover className="p-6 flex flex-col h-full">
       {/* Shift Photo Container */}
       <div className="w-full h-64 bg-zinc-900/50 rounded-md mb-4 flex items-center justify-center border border-white/5 overflow-hidden relative">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={shift.metadata.img_url}
           alt={`${shift.context.event} - ${formattedDate}`}
-          /* CHANGES HERE: 
-             - object-contain: Shows the whole image without cropping
-             - p-2: Adds a small breathing room around the screenshot
-          */
           className="max-w-full max-h-full object-contain p-2"
           onError={(e) => {
             (e.target as HTMLImageElement).src = "https://placehold.co/600x400/18181b/fbbf24?text=Audit+Photo+Missing";

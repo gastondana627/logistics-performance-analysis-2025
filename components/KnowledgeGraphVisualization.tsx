@@ -8,7 +8,7 @@ interface Node {
   id: string;
   label: string;
   sublabel: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   color: string;
   textColor: string;
   x: number;

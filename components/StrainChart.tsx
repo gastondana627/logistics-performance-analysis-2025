@@ -14,15 +14,21 @@ export function StrainChart({ data }: { data: ChartData[] }) {
   const HAZARD_THRESHOLD = 7.55;
 
   // Custom Tooltip with Hazard Indicator
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: Array<{
+    dataKey: string;
+    name: string;
+    value: number;
+    color: string;
+    payload: { date: string };
+  }> }) => {
     if (active && payload && payload.length) {
-      const strainValue = payload.find((p: any) => p.dataKey === 'strain')?.value;
-      const isHazard = strainValue >= HAZARD_THRESHOLD;
+      const strainValue = payload.find((p) => p.dataKey === 'strain')?.value;
+      const isHazard = strainValue !== undefined && strainValue >= HAZARD_THRESHOLD;
 
       return (
         <div className="bg-zinc-950 border border-ups-gold/30 rounded-lg p-3 shadow-xl">
           <p className="text-xs text-zinc-400 mb-2">{payload[0].payload.date}</p>
-          {payload.map((entry: any, index: number) => (
+          {payload.map((entry, index: number) => (
             <div key={index} className="flex items-center justify-between gap-4 mb-1">
               <span className="text-xs" style={{ color: entry.color }}>
                 {entry.name}:

@@ -38,6 +38,12 @@ export function PeakDayCard({ shift }: { shift: ShiftData }) {
     year: 'numeric' 
   });
 
+  // Strain Index Hazard Threshold Logic
+  const HAZARD_THRESHOLD = 7.55;
+  const isHazardLevel = shift.metrics.strain_index >= HAZARD_THRESHOLD;
+  const strainStatus = isHazardLevel ? "HAZARD" : "NOMINAL";
+  const strainColor = isHazardLevel ? "text-red-500" : "text-white";
+
   return (
     <GlassCard hover className="p-6 flex flex-col h-full">
       {/* Shift Photo Container */}
@@ -116,7 +122,14 @@ export function PeakDayCard({ shift }: { shift: ShiftData }) {
             </div>
             <div>
               <span className="text-ups-gold block mb-0.5">STRAIN IDX</span> 
-              <span className="text-white">{shift.metrics.strain_index}</span>
+              <div className="flex items-center gap-2">
+                <span className={strainColor}>{shift.metrics.strain_index}</span>
+                {isHazardLevel && (
+                  <span className="px-1.5 py-0.5 bg-red-500/20 border border-red-500/50 rounded text-[9px] font-bold text-red-500 animate-pulse">
+                    {strainStatus}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { GlassCard } from "./GlassCard";
-import { Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart } from "recharts";
+import { Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart, ReferenceLine } from "recharts";
 
 interface ChartData {
   date: string;
@@ -11,6 +11,42 @@ interface ChartData {
 }
 
 export function StrainChart({ data }: { data: ChartData[] }) {
+  const HAZARD_THRESHOLD = 7.55;
+
+  // Custom Tooltip with Hazard Indicator
+  const CustomTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      const strainValue = payload.find((p: any) => p.dataKey === 'strain')?.value;
+      const isHazard = strainValue >= HAZARD_THRESHOLD;
+
+      return (
+        <div className="bg-zinc-950 border border-ups-gold/30 rounded-lg p-3 shadow-xl">
+          <p className="text-xs text-zinc-400 mb-2">{payload[0].payload.date}</p>
+          {payload.map((entry: any, index: number) => (
+            <div key={index} className="flex items-center justify-between gap-4 mb-1">
+              <span className="text-xs" style={{ color: entry.color }}>
+                {entry.name}:
+              </span>
+              <span className="text-sm font-bold text-white">
+                {entry.value}
+              </span>
+            </div>
+          ))}
+          {isHazard && (
+            <div className="mt-2 pt-2 border-t border-red-500/30">
+              <div className="flex items-center gap-2 px-2 py-1 bg-red-500/20 border border-red-500/50 rounded">
+                <span className="text-[10px] font-bold text-red-500 uppercase animate-pulse">
+                  ⚠ HAZARD LEVEL
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <GlassCard className="p-6">
       <div className="mb-4">
@@ -40,12 +76,7 @@ export function StrainChart({ data }: { data: ChartData[] }) {
             label={{ value: 'Strain Index', angle: 90, position: 'insideRight', fill: '#ef4444' }}
           />
           <Tooltip 
-            contentStyle={{ 
-              backgroundColor: '#18181b', 
-              border: '1px solid rgba(255, 181, 0, 0.3)',
-              borderRadius: '8px',
-              color: '#fff'
-            }}
+            content={<CustomTooltip />}
           />
           <Legend 
             wrapperStyle={{ color: '#a1a1aa' }}
@@ -65,6 +96,20 @@ export function StrainChart({ data }: { data: ChartData[] }) {
             strokeWidth={3}
             name="Strain Index"
             dot={{ fill: '#ef4444', r: 4 }}
+          />
+          <ReferenceLine 
+            yAxisId="right"
+            y={HAZARD_THRESHOLD} 
+            stroke="#dc2626" 
+            strokeDasharray="5 5"
+            strokeWidth={2}
+            label={{ 
+              value: `Hazard Threshold (${HAZARD_THRESHOLD})`, 
+              position: 'right',
+              fill: '#dc2626',
+              fontSize: 11,
+              fontWeight: 'bold'
+            }}
           />
         </ComposedChart>
       </ResponsiveContainer>

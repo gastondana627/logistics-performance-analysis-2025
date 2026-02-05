@@ -5,6 +5,7 @@ import { StrategicSummary } from "@/components/StrategicSummary";
 import { ExecutiveConnect } from "@/components/ExecutiveConnect";
 import { ResearchTransparency } from "@/components/ResearchTransparency";
 import { WatchBot } from "@/components/WatchBot";
+import { KnowledgeGraphVisualization } from "@/components/KnowledgeGraphVisualization";
 import { Package, Heart, Code, ExternalLink, CheckCircle2 } from "lucide-react";
 
 // CORRECTED: Pointing to the actual file location in src/data
@@ -94,6 +95,11 @@ export default function Home() {
       {/* Interactive Chart Area */}
       <section className="container mx-auto px-4 py-12">
         <StrainChart data={chartData} />
+      </section>
+
+      {/* System Architecture Knowledge Graph */}
+      <section className="container mx-auto px-4 py-12">
+        <KnowledgeGraphVisualization />
       </section>
 
       {/* Knowledge Bridge Footer */}

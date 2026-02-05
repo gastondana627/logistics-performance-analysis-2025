@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { GlassCard } from "./GlassCard";
-import { Database, Shield, Zap, Award, Globe, Users, Activity, GitBranch, Maximize2 } from "lucide-react";
+import { Database, Shield, Zap, Award, Globe, Users, Activity, GitBranch, Maximize2, ExternalLink, Clock } from "lucide-react";
 
 interface Node {
   id: string;
@@ -14,12 +14,19 @@ interface Node {
   x: number;
   y: number;
   layer: number;
+  externalLink?: string;
+  subNode?: {
+    label: string;
+    icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  };
 }
 
 interface Edge {
   from: string;
   to: string;
   label?: string;
+  style?: 'solid' | 'dashed';
+  glow?: boolean;
 }
 
 export function KnowledgeGraphVisualization() {
@@ -38,7 +45,8 @@ export function KnowledgeGraphVisualization() {
       textColor: "#fff",
       x: 15,
       y: 20,
-      layer: 1
+      layer: 1,
+      externalLink: "https://www.kaggle.com/code/gastondana/exploratory-analysis-quantifying-human-cost-final"
     },
     {
       id: "osha",
@@ -49,7 +57,11 @@ export function KnowledgeGraphVisualization() {
       textColor: "#fff",
       x: 15,
       y: 60,
-      layer: 1
+      layer: 1,
+      subNode: {
+        label: "Audit Progress: Row 93,247",
+        icon: Clock
+      }
     },
     // Layer 2: Processing
     {
@@ -57,7 +69,7 @@ export function KnowledgeGraphVisualization() {
       label: "Kinetic Logic",
       sublabel: "Engine",
       icon: GitBranch,
-      color: "#ffb500",
+      color: "#FFB800",
       textColor: "#000",
       x: 40,
       y: 40,
@@ -65,11 +77,11 @@ export function KnowledgeGraphVisualization() {
     },
     {
       id: "protocol",
-      label: "V4-Hard",
+      label: "V6-Full Burn",
       sublabel: "Protocol",
       icon: Zap,
-      color: "#7c3aed",
-      textColor: "#fff",
+      color: "#FFB800",
+      textColor: "#000",
       x: 60,
       y: 25,
       layer: 2
@@ -135,14 +147,14 @@ export function KnowledgeGraphVisualization() {
 
   // Define edges (connections)
   const edges: Edge[] = [
-    { from: "parcel", to: "engine", label: "7.55 SI" },
-    { from: "osha", to: "engine", label: "93k+" },
-    { from: "engine", to: "protocol", label: "Benchmark" },
-    { from: "protocol", to: "canary", label: "Validate" },
-    { from: "canary", to: "orcid", label: "Cite" },
-    { from: "canary", to: "vercel", label: "Track" },
-    { from: "vercel", to: "recruiter", label: "Showcase" },
-    { from: "orcid", to: "community", label: "Align" }
+    { from: "parcel", to: "engine", label: "7.55 SI Calibration", style: 'solid', glow: true },
+    { from: "osha", to: "engine", label: "93k+", style: 'dashed', glow: false },
+    { from: "engine", to: "protocol", label: "Benchmark", style: 'solid', glow: true },
+    { from: "protocol", to: "canary", label: "Validate", style: 'solid', glow: true },
+    { from: "canary", to: "orcid", label: "Cite", style: 'dashed', glow: false },
+    { from: "canary", to: "vercel", label: "Track", style: 'solid', glow: true },
+    { from: "vercel", to: "recruiter", label: "Showcase", style: 'dashed', glow: false },
+    { from: "orcid", to: "community", label: "Align", style: 'dashed', glow: false }
   ];
 
   const getNodeById = (id: string) => nodes.find(n => n.id === id);
@@ -157,7 +169,7 @@ export function KnowledgeGraphVisualization() {
   };
 
   const GraphContent = () => (
-    <div className="relative w-full h-full min-h-[600px]">
+    <div className="relative w-full h-full min-h-[600px]" style={{ backgroundColor: '#121212' }}>
       {/* SVG for edges */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
         <defs>
@@ -169,8 +181,15 @@ export function KnowledgeGraphVisualization() {
             refY="3"
             orient="auto"
           >
-            <polygon points="0 0, 10 3, 0 6" fill="#ffb500" />
+            <polygon points="0 0, 10 3, 0 6" fill="#FFB800" />
           </marker>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </defs>
         {edges.map((edge, idx) => {
           const fromNode = getNodeById(edge.from);
@@ -179,6 +198,9 @@ export function KnowledgeGraphVisualization() {
 
           const isHighlighted = hoveredNode === edge.from || hoveredNode === edge.to;
           const opacity = !hoveredNode || isHighlighted ? 1 : 0.2;
+          const strokeDasharray = edge.style === 'dashed' ? "5,5" : "0";
+          const strokeWidth = isHighlighted ? "3" : "2";
+          const filter = edge.glow && isHighlighted ? "url(#glow)" : undefined;
 
           return (
             <g key={idx}>
@@ -187,18 +209,19 @@ export function KnowledgeGraphVisualization() {
                 y1={`${fromNode.y}%`}
                 x2={`${toNode.x}%`}
                 y2={`${toNode.y}%`}
-                stroke="#ffb500"
-                strokeWidth={isHighlighted ? "3" : "2"}
-                strokeDasharray={isHighlighted ? "0" : "5,5"}
+                stroke="#FFB800"
+                strokeWidth={strokeWidth}
+                strokeDasharray={strokeDasharray}
                 opacity={opacity}
                 markerEnd="url(#arrowhead)"
+                filter={filter}
                 className="transition-all duration-300"
               />
               {edge.label && (
                 <text
                   x={`${(fromNode.x + toNode.x) / 2}%`}
                   y={`${(fromNode.y + toNode.y) / 2}%`}
-                  fill="#ffb500"
+                  fill="#FFB800"
                   fontSize="10"
                   fontWeight="bold"
                   textAnchor="middle"
@@ -237,11 +260,26 @@ export function KnowledgeGraphVisualization() {
               className="relative flex flex-col items-center gap-2 p-4 rounded-xl border-2 shadow-lg cursor-pointer"
               style={{
                 backgroundColor: node.color,
-                borderColor: isHovered ? '#ffb500' : 'rgba(255, 255, 255, 0.2)',
-                boxShadow: isHovered ? '0 0 30px rgba(255, 181, 0, 0.5)' : '0 4px 6px rgba(0, 0, 0, 0.3)'
+                borderColor: isHovered ? '#FFB800' : 'rgba(255, 255, 255, 0.2)',
+                boxShadow: isHovered ? '0 0 30px rgba(255, 184, 0, 0.5)' : '0 4px 6px rgba(0, 0, 0, 0.3)'
               }}
             >
-              <Icon className="w-6 h-6" style={{ color: node.textColor }} />
+              <div className="flex items-center gap-2">
+                <Icon className="w-6 h-6" style={{ color: node.textColor }} />
+                {node.externalLink && (
+                  <a
+                    href={node.externalLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:scale-110 transition-transform"
+                    onClick={(e) => e.stopPropagation()}
+                    title="View Kaggle Analysis"
+                    aria-label="View Kaggle Analysis"
+                  >
+                    <ExternalLink className="w-4 h-4" style={{ color: node.textColor }} />
+                  </a>
+                )}
+              </div>
               <div className="text-center">
                 <div className="text-xs font-bold whitespace-nowrap" style={{ color: node.textColor }}>
                   {node.label}
@@ -250,6 +288,20 @@ export function KnowledgeGraphVisualization() {
                   {node.sublabel}
                 </div>
               </div>
+              
+              {/* Sub-node for OSHA */}
+              {node.subNode && (
+                <div 
+                  className="mt-2 pt-2 border-t flex items-center gap-1"
+                  style={{ borderColor: 'rgba(255, 255, 255, 0.2)' }}
+                >
+                  {node.subNode.icon && <node.subNode.icon className="w-3 h-3" style={{ color: node.textColor }} />}
+                  <div className="text-[9px]" style={{ color: node.textColor, opacity: 0.9 }}>
+                    {node.subNode.label}
+                  </div>
+                </div>
+              )}
+              
               {isHovered && (
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-zinc-900 text-white text-[10px] px-2 py-1 rounded whitespace-nowrap border border-ups-gold/30">
                   Layer {node.layer}
@@ -261,18 +313,28 @@ export function KnowledgeGraphVisualization() {
       })}
 
       {/* Layer Labels */}
-      <div className="absolute top-4 left-4 text-xs text-zinc-500 font-mono space-y-1">
+      <div className="absolute top-4 left-4 text-xs text-zinc-400 font-mono space-y-2 bg-zinc-900/50 backdrop-blur-sm p-3 rounded-lg border border-white/10">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-[#4b2c20]"></div>
           <span>Data Layer</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-[#ffb500]"></div>
-          <span>Logic Layer</span>
+          <div className="w-3 h-3 rounded-full bg-[#FFB800]"></div>
+          <span>Logic Layer (Safety Yellow)</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-[#10b981]"></div>
           <span>Impact Layer</span>
+        </div>
+        <div className="mt-3 pt-2 border-t border-white/10 space-y-1">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-0.5 bg-[#FFB800]"></div>
+            <span className="text-[10px]">Active V6</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-0.5 bg-[#FFB800]" style={{ backgroundImage: 'repeating-linear-gradient(to right, #FFB800 0, #FFB800 3px, transparent 3px, transparent 6px)' }}></div>
+            <span className="text-[10px]">Historical</span>
+          </div>
         </div>
       </div>
 

@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Project: Human Logistics Audit",
-  description: "Biometric Analysis of UPS Peak Season Operations - A Data Science Portfolio",
+  description: "Biometric Analysis of 2026 Parcel Peak Season Operations - A Data Science Portfolio",
 };
 
 export default function RootLayout({

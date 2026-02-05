@@ -42,7 +42,7 @@ export default function Home() {
                   Project: Human Logistics Audit
                 </h1>
                 <p className="text-zinc-400 text-lg">
-                  Biometric Analysis of UPS Peak Season Operations
+                  Biometric Analysis of 2026 Parcel Peak Season Operations
                 </p>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full">
@@ -144,7 +144,7 @@ export default function Home() {
                 AI-enhanced sensor fusion were performed via the{" "}
                 <span className="text-ups-gold font-semibold">S22 Ultra</span> hub. This project isolates 
                 Operational Strain by filtering out non-sortation movement to provide an accurate representation 
-                of physical output during the 2025 Peak Season.
+                of physical output during the 2026 Peak Season.
               </p>
             </div>
           </div>
@@ -152,7 +152,7 @@ export default function Home() {
           {/* Footer Credits */}
           <div className="mt-6 text-center text-xs text-zinc-600">
             <p>Built with Next.js 14, TypeScript, Tailwind CSS, and Recharts</p>
-            <p className="mt-1">© 2024 Human Logistics Audit Project</p>
+            <p className="mt-1">© 2026 Human Logistics Audit Project</p>
           </div>
 
           {/* Legal Disclaimer */}

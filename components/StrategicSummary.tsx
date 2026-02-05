@@ -20,7 +20,7 @@ export function StrategicSummary() {
             <h3 className="text-xl font-bold text-white">The Mission</h3>
           </div>
           <p className="text-zinc-300 leading-relaxed">
-            A high-fidelity analysis of 3 compressed operational windows during the 2025 UPS Peak Season. 
+            A high-fidelity analysis of 3 compressed operational windows during the 2026 Parcel Peak Season. 
             Powered by the{" "}
             <span className="text-ups-gold font-semibold">Samsung BioActive Sensor</span> suite on the{" "}
             <span className="text-ups-gold font-semibold">Galaxy Watch 5</span>, this study isolates 
